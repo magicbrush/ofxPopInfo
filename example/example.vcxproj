@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>example</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories);..\..\..\addons\ofxPopInfo\libs;..\..\..\addons\ofxPopInfo\src;..\..\..\addons\ofxPopInfo\src\LuaSrc</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>LuaDebug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(ProjectDir)lib</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;%(AdditionalIncludeDirectories);..\..\..\addons\ofxPopInfo\libs;..\..\..\addons\ofxPopInfo\src;..\..\..\addons\ofxPopInfo\src\LuaSrc</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>Lua.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\ArcBarNode.cpp" />
+    <ClCompile Include="..\src\ofxLua.cpp" />
+    <ClCompile Include="..\src\ofxLuaBindings.cpp" />
+    <ClCompile Include="..\src\ofxLuaFileWriter.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\BalloonNode.cpp" />
+    <ClCompile Include="..\src\LyuUtils.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\Informer.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lapi.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lauxlib.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lbaselib.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lcode.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ldblib.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ldebug.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ldo.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ldump.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lfunc.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lgc.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\linit.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\liolib.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\llex.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lmathlib.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lmem.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\loadlib.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lobject.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lopcodes.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\loslib.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lparser.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lstate.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lstring.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lstrlib.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ltable.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ltablib.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ltm.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lundump.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lvm.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lzio.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\print.c" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\ofxAssets.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxPopInfo\src\TextNode.cpp" />
+    <ClCompile Include="..\src\ofxNodeController.cpp" />
+    <ClCompile Include="..\src\ofxNodeCtrlLua.cpp" />
+    <ClCompile Include="..\src\ResizingCircleNode.cpp" />
+    <ClCompile Include="..\src\TimerNode.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ofApp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\ArcBarNode.h" />
+    <ClInclude Include="..\src\ofxLua.h" />
+    <ClInclude Include="..\src\ofxLuaBindings.h" />
+    <ClInclude Include="..\src\ofxLuaFileWriter.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\BalloonNode.h" />
+    <ClInclude Include="..\src\LyuUtils.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\Informer.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lapi.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lauxlib.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lcode.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ldebug.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ldo.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lfunc.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lgc.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\llex.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\llimits.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lmem.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lobject.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lopcodes.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lparser.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lstate.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lstring.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ltable.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\ltm.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lua.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lua.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\luaconf.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lualib.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lundump.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lvm.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\LuaSrc\lzio.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\ofxAssets.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\SingletonTemplate.h" />
+    <ClInclude Include="..\..\..\addons\ofxPopInfo\src\TextNode.h" />
+    <ClInclude Include="..\src\ofxNodeController.h" />
+    <ClInclude Include="..\src\ofxNodeCtrlLua.h" />
+    <ClInclude Include="..\src\ResizingCircleNode.h" />
+    <ClInclude Include="..\src\TimerNode.h" />
+    <ClInclude Include="src\ofApp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
+      <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
