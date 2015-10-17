@@ -42,6 +42,9 @@ namespace Lyu
     float height,
     float EdgeWidth = 0.0f);
 
+  // Text
+  string revertTextLines( string Txt );
+
   // mesh 
   ofMesh genRectMesh(float x, float y, float wd, float ht);
   ofMesh genLineMesh(ofPoint P0, ofPoint P1);

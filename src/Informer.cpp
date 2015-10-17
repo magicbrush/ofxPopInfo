@@ -34,7 +34,10 @@ namespace Lyu
     ofViewport(x,y,w,h);
     for(auto &info:I)
     {
-      info.second.iNode->draw();
+      if(info.second.delay<=0)
+      {
+        info.second.iNode->draw();
+      }      
     }
     ofPopView();
   }
@@ -80,7 +83,7 @@ namespace Lyu
     pushNodeCtrl(nCtrl,MSG.iNode,duration,delay,speed);    
   }
 
-  void Informer::clear()
+  void Informer::clearInfo()
   {
     I.clear();
   }
@@ -219,8 +222,8 @@ namespace Lyu
     for(it2=C.begin();it2<C.end();it2++)
     {
       bool bSingleUse = (it2->NTgt.use_count()==1);
-      bool bOut = (it2->duration<=0);
-      if(bSingleUse||bOut)
+      bool bExpire = (it2->duration<=0);
+      if(bSingleUse||bExpire)
       {
         C.erase(it2);
         break;
@@ -244,7 +247,28 @@ namespace Lyu
     }
   }
 
-  ofPtr<ofNode> pushResizingCircle( 
+  void Informer::pushNodeCtrlLuas( 
+    vector<ofPtr<ofNode> > nTgt,
+    string LuaFcnName /*= "shaking"*/, 
+    string LuaScriptPath /*= "Lua\\ofxNodeCtrlLua.lua"*/,     
+    float duration /*= 1.0f*/, 
+    float delay /*= 0.0f*/, 
+    float speed /*= 1.0f*/ )
+  {
+    for(auto &pn:nTgt)
+    {
+      NodeCtrlStruct NCS;
+      NCS.NTgt = pn;
+      NCS.delay = delay;
+      NCS.duration = duration;
+      NCS.speed = speed;      
+      NCS.NCtrl.reset(new ofxNodeCtrlLua(
+        LuaFcnName,speed,LuaScriptPath));
+      C.push_back(NCS);
+    }
+  }
+
+  ofPtr<ofNode> Informer::pushResizingCircle( 
     ofVec2f pos, 
     float duration /*= 1.0f*/, 
     float delay /*= 0.0f*/,
@@ -269,7 +293,7 @@ namespace Lyu
       wmode));
     pN->setPosition(pos);
     pN->setScale(ofVec3f(Scale.x,Scale.y,1.0f));
-    INFORMER.pushInfo(pN,duration,delay,zOrder,spd);
+    pushInfo(pN,duration,delay,zOrder,spd);
     return pN;
   }
 

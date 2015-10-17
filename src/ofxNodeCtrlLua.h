@@ -28,9 +28,13 @@ namespace Lyu
   private:
     string LuaFunction;
     float Speed;
+    bool bUpdated;
+    vector<float> Pos0;
+    vector<float> Scl0;
+    vector<float> Quat0;
 
     static ofPtr<ofxLua> L;  
     static vector<string> ScriptPaths;
-
+   
   };
 }

@@ -1,4 +1,5 @@
 #include "LyuUtils.h"
+#include <algorithm>
 
 namespace Lyu
 {
@@ -36,21 +37,27 @@ namespace Lyu
     //从基准点Base用pFont绘制文本Txt
     if(EdgeWidth<=0.0f)
     {
-      pFont->drawString(Txt,Base.x,Base.y); 
+      pFont->drawString(Txt,Base.x,Base.y);       
     }
     else
-    {
-      ofTranslate(Base);
+    {     
+      string TxtR = revertTextLines(Txt);      
+      size_t n = std::count(TxtR.begin(), TxtR.end(), '\n');
+      float dy = (n-1)*pFont->getLineHeight();
+      ofVec2f Trans = Base;
+      ofTranslate(Trans);
       vector<ofTTFCharacter> Chs = 
-        pFont->getStringAsPoints(Txt);
-      for(auto &c:Chs)
-      {
+        pFont->getStringAsPoints(TxtR,true);  
+      ofTranslate(0,dy);
+      for(auto &c:Chs)      {
+        
         for(auto &pl:c.getOutline())
-        {
-          pl.draw();
+        {         
+          pl.draw();          
         }
       }
-      ofTranslate(-Base);
+      ofTranslate(0,-dy);
+      ofTranslate(-Trans);
     }    
 
     // 进行逆变换：从Rect变换到R0
@@ -58,6 +65,8 @@ namespace Lyu
     MatI = Mat.getInverse();
     ofMultMatrix(MatI); // 实现逆变换
   }
+
+  
 
   void drawTxtByFontFillRect( 
     string Txt, 
@@ -278,7 +287,34 @@ namespace Lyu
     return u * c;
   }
 
-
-
+  std::string revertTextLines( string Txt )
+  {
+    string TxtR;
+    stringstream ss;
+    ss << Txt << endl;
+    ofBuffer B;
+    B.set(ss);      
+    vector<string> TextLines;
+    while(!B.isLastLine())
+    {
+      TextLines.push_back(B.getNextLine());
+    }
+    
+    stringstream ss3;
+    vector<string>::reverse_iterator ritl;
+    if(TextLines.size()==1)
+    {
+      ss3 << TextLines[0] << endl;
+    }
+    else
+    {
+      for(ritl=TextLines.rbegin()+1;ritl<TextLines.rend();ritl++)
+      {        
+        ss3 << *ritl << endl;
+      } 
+    }       
+    return ss3.str();
+  }
 
 }
+
