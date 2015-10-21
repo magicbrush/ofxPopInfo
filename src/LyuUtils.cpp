@@ -66,8 +66,6 @@ namespace Lyu
     ofMultMatrix(MatI); // ÊµÏÖÄæ±ä»»
   }
 
-  
-
   void drawTxtByFontFillRect( 
     string Txt, 
     ofTrueTypeFont* pFont, 
@@ -314,6 +312,11 @@ namespace Lyu
       } 
     }       
     return ss3.str();
+  }
+
+  float getWindowSize()
+  {
+    return sqrt(ofGetWidth()*ofGetHeight());
   }
 
 }

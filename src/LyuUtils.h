@@ -63,6 +63,9 @@ namespace Lyu
   // get rand num by normal distribution
   double sampleNormal(); 
 
+  // size
+  float getWindowSize();
+
 }
 
 #endif

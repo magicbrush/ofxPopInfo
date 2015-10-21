@@ -29,7 +29,7 @@ void ofApp::update(){
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){  
+void ofApp::draw(){
   pN->draw();
   for(auto &P:Particles)
     P->draw();
@@ -206,7 +206,11 @@ void ofApp::keyPressed(int key){
   if(key==OF_KEY_F10)
   {
     string LuaFcnName[5] = {
-      "zoomInOut","ascend","rolling","trembling","shakingAround"};
+      "zoomInOut",
+      "ascend",
+      "rolling",
+      "trembling",
+      "shakingAround"};
     string LuaFN = LuaFcnName[idLuaFcn];
     stringstream ss;     
     INFORMER.pushNodeCtrlLuas(
