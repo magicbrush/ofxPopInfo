@@ -26,4 +26,5 @@ The classic usage is real-time feedback in games:
 ## dependency
 
 It embeds a modified version of ofxLua. The source is from: https://github.com/danomatika/ofxLua
+
 It also embeds ofxAssets: https://github.com/elliotwoods/ofxAssets
