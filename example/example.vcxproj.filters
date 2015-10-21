@@ -272,6 +272,9 @@
     <ClInclude Include="..\src\ofxNodeCtrlLua.h">
       <Filter>addons\ofxPopInfo\src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\ofxPopInfo.h">
+      <Filter>addons\ofxPopInfo\src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

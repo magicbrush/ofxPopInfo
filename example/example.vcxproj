@@ -173,6 +173,7 @@
     <ClInclude Include="..\..\..\addons\ofxPopInfo\src\TextNode.h" />
     <ClInclude Include="..\src\ofxNodeController.h" />
     <ClInclude Include="..\src\ofxNodeCtrlLua.h" />
+    <ClInclude Include="..\src\ofxPopInfo.h" />
     <ClInclude Include="..\src\ResizingCircleNode.h" />
     <ClInclude Include="..\src\TimerNode.h" />
     <ClInclude Include="src\ofApp.h" />

@@ -9,7 +9,8 @@ Lyu::ofxNodeCtrlLua::ofxNodeCtrlLua(
    float speed,
   string LuaPath/*="Lua\\ofxNodeCtrlLua.lua"*/ ):
 LuaFunction(FcnName),
-Speed(speed)
+Speed(speed),
+bUpdated(false)
 {
   if(L.use_count()==0)
   {
@@ -30,14 +31,25 @@ void Lyu::ofxNodeCtrlLua::update( ofNode* pn )
       L->doScript(LuaPath);
   }
   
+  if(!bUpdated)
+  {
+    ofVec3f p0 = pn->getPosition();
+    ofVec3f s0 = pn->getScale();
+    ofVec3f q0 = pn->getOrientationQuat().asVec3();
+    Pos0.assign(&p0[0],&p0[0]+3);
+    Scl0.assign(&s0[0],&s0[0]+3);
+    Quat0.assign(&q0[0],&q0[0]+3);
+  }
+
   bool bTable = L->pushTable("Position");
   if(!bTable)
     return;
   L->popAllTables();
-  
+    
   inputLuaState(pn);
   L->scriptFcn(LuaFunction);  
   setNodeFromLuaState(pn);
+  bUpdated = true;
 }
 
 void Lyu::ofxNodeCtrlLua::resetLuaScript( string LuaPath )
@@ -79,6 +91,10 @@ void Lyu::ofxNodeCtrlLua::inputLuaState( ofNode* pn )
   vector<float> Quat;
   for(int i=0;i<4;i++)Quat.push_back(Q[i]);
   L->setFloatVector("Orientation",Quat);
+    
+  L->setFloatVector("Position0",Pos0);
+  L->setFloatVector("Scale0",Scl0);
+  L->setFloatVector("Orientation0",Quat0);  
 }
 
 void Lyu::ofxNodeCtrlLua::setNodeFromLuaState( ofNode* pn )
